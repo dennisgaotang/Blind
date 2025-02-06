@@ -7,9 +7,21 @@ class TreeNode:
         self.right = right
 
 class BinaryTree:
-    def __init__(self, level_order):
-        self.level_order = level_order  # Store level-order values
-        self.root = self.build_tree(level_order)
+    def __init__(self, data):
+        """
+        Optional parameter `data` can be:
+        - A list (level-order) -> Builds tree from list
+        - A TreeNode -> Uses it as the root
+        - None -> Creates an empty tree
+        """
+        if isinstance(data, str):  # If data is a list, build the tree
+            data = data.split(",")
+            self.root = self.build_tree(data)
+        elif isinstance(data, TreeNode):  # If data is a TreeNode, set as root
+            self.root = data
+        else:
+            self.root = None  # Default to an empty tree
+
 
     def build_tree(self, level_order):
         if not level_order or level_order[0] == "null":
